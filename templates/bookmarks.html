@@ -1,0 +1,34 @@
+<ion-view view-title="Saved Books" cache-view="false">
+	<ion-content>
+		<ion-list ng-show="publications.length > 0">
+			<ion-item ng-repeat="publication in publications track by $index" ui-sref="app.publication({data:publication})">
+				<img ng-if="publication.cover_id" ng-src="http://covers.openlibrary.org/b/id/{{publication.cover_id}}-S.jpg" class="cover-image responsive-image" align="left" />
+				<img ng-if="!publication.cover_id" ng-src="img/default.png" class="cover-image responsive-image" align="left" />
+				<h2>
+					{{publication.title}}
+				</h2>
+				<h4 ng-if="publication.subtitle">
+					{{publication.subtitle}}
+				</h4>
+				<p>
+					{{publication.authors | author_display}}
+				</p>	
+			</ion-item>
+		</ion-list>
+		<div ng-show="publications.length === 0" class="text-center empty-set">
+			<div class="row-center">
+				<div class="col col-center">
+					<h1>
+						<i class="icon ion-star"></i>
+					</h1>
+					<h4>
+						No saved books 
+					</h4>
+					<p>
+						When you find a book you'd like to save for later, keep it here by tapping the star icon.
+					</p>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

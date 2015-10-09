@@ -1,0 +1,20 @@
+<ion-view view-title="Featured Works">
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="publication in publications track by $index" ui-sref="app.publication({data:publication})">
+				<img ng-if="publication.cover_id" ng-src="http://covers.openlibrary.org/b/id/{{publication.cover_id}}-S.jpg" class="cover-image responsive-image" align="left" />
+				<img ng-if="!publication.cover_id" ng-src="img/default.png" class="cover-image responsive-image" align="left" />
+				<h2>
+					{{publication.title}}
+				</h2>
+				<h5 ng-if="publication.subtitle">
+					{{publication.subtitle}}
+				</h5>
+				<p>
+					{{publication.authors | author_display}}
+				</p>	
+			</ion-item>
+		</ion-list>
+		<ion-infinite-scroll ng-if="!end" on-infinite="loadMore(page);" distance="1%"></ion-infinite-scroll>
+	</ion-content>
+</ion-view>

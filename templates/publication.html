@@ -1,0 +1,110 @@
+<ion-view view-title="Details">
+
+    <ion-nav-buttons ng-hide="!loaded" side="right">
+		<a ng-click="toggleBookmark(publication)" class="button button-clear">
+			<i ng-show="bookmarked" class="icon ion-ios7-star"></i>
+			<i ng-hide="bookmarked" class="icon ion-ios7-star-outline"></i>
+		</a>
+    </ion-nav-buttons>
+
+	<ion-content>
+		<div ng-show="loaded" class="card">
+
+			<div class="row">
+				<div class="col col-33">
+					<img ng-if="publication.cover_id" ng-src="http://covers.openlibrary.org/b/id/{{publication.cover_id}}-L.jpg" class="cover-image responsive-image" />
+					<img ng-if="!publication.cover_id" ng-src="img/default.png" class="cover-image responsive-image" />
+				</div>
+				<div class="col">
+					<h4>
+						{{publication.title}}
+					</h4>
+					<h5 ng-if="publication | publication_display:'subtitle'">
+						{{publication | publication_display:'subtitle'}}
+					</h5>
+					<p ng-if="publication.authors.length > 0">
+						By {{publication.authors | author_display}}
+					</p>
+					<p ng-if="publication | display_publication_date">
+						Published {{publication | display_publication_date}}
+					</p>
+					<p ng-if="publication | publication_display:'publishers'">
+						Published by {{publication | publication_display:'publishers'}}
+					</p>
+				</div>
+			</div><!-- /.row -->
+
+			<div ng-if="(publication | publication_display:'description') || (publication.excerpts.length > 0) || ((publication | publication_display:'notes') || (publication | publication_display:'number_of_pages') || (publication | publication_display:'physical_format'))" class="list">
+				<div class="item item-divider">
+					About the Book
+				</div>
+				<div ng-if="publication | publication_display:'description'" class="row">
+					<div class="col">
+						<h5>
+							Description
+						</h5>
+						<div ng-bind-html="publication | publication_display:'description' | as_html"></div>
+					</div>
+				</div>
+				<div ng-if="publication.excerpts.length > 0" class="row">
+					<div class="col">
+						<h5>
+							Excerpt
+						</h5>
+						<p>
+							{{publication.excerpts[0].excerpt.value}}
+						</p>
+					</div>
+				</div>
+				<div ng-if="(publication | publication_display:'notes') || (publication | publication_display:'number_of_pages') || (publication | publication_display:'physical_format')" class="row">
+					<div class="col">
+						<h5>
+							Notes
+						</h5>
+						<div ng-if="publication | publication_display:'notes'">
+							<p ng-bind-html="publication | publication_display:'notes' | as_html"></p>
+						</div>
+						<div ng-if="publication | publication_display:'physical_format'">
+							<p>
+								{{publication | publication_display:'physical_format'}}
+							</p>
+						</div>
+						<div ng-if="publication | publication_display:'number_of_pages'">
+							<p>
+								{{publication | publication_display:'number_of_pages'}} pages
+							</p>
+						</div>
+					</div>
+				</div>
+			</div><!-- /.list -->
+
+			<div ng-if="(publication | publication_display:'isbn_10') || (publication | publication_display:'isbn_13') || (publication | publication_display:'dewey_decimal_class')" class="list">
+				<div class="item item-divider">
+					ID Numbers
+				</div>
+				<div ng-if="publication | publication_display:'isbn_10'" class="item">
+					ISBN 10
+					<span class="item-note">
+						{{publication | publication_display:'isbn_10'}}
+					</span>
+				</div>
+				<div ng-if="publication | publication_display:'isbn_13'" class="item">
+					ISBN 13
+					<span class="item-note">
+						{{publication | publication_display:'isbn_13'}}
+					</span>
+				</div>
+				<div ng-if="publication | publication_display:'dewey_decimal_class'" class="item">
+					Dewey Decimal
+					<span class="item-note">
+						{{publication | publication_display:'dewey_decimal_class'}}
+					</span>
+				</div>
+			</div><!-- /.list -->
+
+		</div><!-- /.card -->
+		<div ng-if="!loaded" class="activity-indicator">
+			<i class="icon ion-loading-d icon-refreshing"></i>
+		</div>
+	</ion-content>
+</ion-view>

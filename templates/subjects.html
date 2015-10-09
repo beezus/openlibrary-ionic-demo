@@ -1,0 +1,10 @@
+<ion-view view-title="All Subjects">
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="subject in subjects track by $index" type="item-text-wrap" ui-sref="app.subject({data:subject})">
+				{{subject.name}}
+			</ion-item>
+		</ion-list>
+		<ion-infinite-scroll on-infinite="loadMore(page);" distance="1%"></ion-infinite-scroll>
+	</ion-content>
+</ion-view>

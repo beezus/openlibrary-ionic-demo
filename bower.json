@@ -1,0 +1,13 @@
+{
+  "name": "open-library-demo",
+  "version": "0.0.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "vendor"
+  ],
+  "dependencies": {
+    "ionic": "~1.1.0",
+    "underscore": "~1.8.3"
+  }
+}
