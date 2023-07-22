@@ -7,7 +7,7 @@ angular.module('open_library.services', [])
  */
 .factory('OpenLibraryAPI', ['$http', '$q', function($http, $q) {
 
-  this.base_url = 'http://openlibrary.org/';
+  this.base_url = 'https://openlibrary.org/';
 
   // Get a list of all subjects
   this.listSubjects = function(page){
